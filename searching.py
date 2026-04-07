@@ -38,16 +38,37 @@ def linear_search(searched_seq, wanted_num):
     }
 
 
+def binary_search(list_of_num, wanted_num):
+    left_edge = 0
+    right_edge = len(list_of_num) - 1
+
+    while left_edge <= right_edge:
+        mid = (left_edge + right_edge) // 2
+
+        if list_of_num[mid] == wanted_num:
+            return mid
+        elif list_of_num[mid] > wanted_num:
+            right_edge = mid - 1
+        else:
+            left_edge = mid + 1
+    return None
+
+
 def main():
     file_to_open = "sequential.json"
-    key_to_find = "unordered_numbers"
+    key_to_find = "ordered_numbers"
 
     sequential_data = read_data(file_to_open, key_to_find)
     print(sequential_data)
 
-    wanted_num = 0
+    wanted_num = 64
     result = linear_search(sequential_data, wanted_num)
     print(result)
+
+    target_num = 64
+    result2 = binary_search(sequential_data, target_num)
+
+    print(result2)
 
 
 if __name__ == '__main__':
