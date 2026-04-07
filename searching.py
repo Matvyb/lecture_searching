@@ -54,6 +54,26 @@ def binary_search(list_of_num, wanted_num):
     return None
 
 
+def pattern_search(seq, pattern):
+    indexes = set()
+    pattern_len = len(pattern)
+    # for i in range(len(seq)-pattern_len + 1):
+    #     if seq[i] == pattern[0]:
+    #         sub_seq = seq[i:i+pattern_len]
+    #         if sub_seq == pattern:
+    #             indexes.add(i)
+    # return indexes
+    for i in range(len(seq) - pattern_len + 1):
+        is_same = True
+        for j in range(pattern_len):
+            if seq[i + j] != pattern[j]:
+                is_same = False
+                break
+        if is_same:
+            indexes.add(i)
+    return indexes
+
+
 def main():
     file_to_open = "sequential.json"
     key_to_find = "ordered_numbers"
@@ -69,6 +89,12 @@ def main():
     result2 = binary_search(sequential_data, target_num)
 
     print(result2)
+
+    dna_sequence = read_data("sequential.json", "dna_sequence")
+    pattern = "ATA"
+
+    result3 = pattern_search(dna_sequence, pattern)
+    print(result3)
 
 
 if __name__ == '__main__':
